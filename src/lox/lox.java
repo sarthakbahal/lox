@@ -66,6 +66,6 @@ static void error(int line, String message) {
     System.err.println(
         "[line " + line + "] Error" + where + ": " + message);
     hadError = true;
-  } 
+  } }
   
   
