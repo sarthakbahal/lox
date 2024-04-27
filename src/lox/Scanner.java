@@ -28,7 +28,7 @@ List<Token> scanTokens(){
 	tokens.add(new Token(EOF, "" , null, line));
 	return tokens;
 }
-private void scanToken() {
+public void scanToken() {
 	char c = advance();
 	switch(c) {
 	 case '(':addToken(LEFT_PAREN);
@@ -48,38 +48,47 @@ private void scanToken() {
 	 case '+':addToken(PLUS);
 	 break;
 	
+
 	 case ';':addToken(SEMICOLON);
 	 break;
 	 case '*':addToken(STAR);
 	 break;
-	
-	 case '!':addToken(match('=')? BANG_EQUAL : BANG);
-	 break;
-	 case '=':addToken(match('=')? EQUAL_EQUAL : EQUAL);
-	 break;
-	 case '<':addToken(match('=')? LESS_EQUAL : LESS);
-	 break;
-	 case '>':addToken(match('=')? GREATER_EQUAL : GREATER);
-	 break;
-	
+	 
 	 case '/':
-		if(match('/')) {
-			while(peek()!= '\n' && !isAtEnd()) advance();
-		}
-		else {
-			addToken(SLASH);
-		}
-		break;
-		
-		
+			if(match('/')) {
+				while(peek()!= '\n' && !isAtEnd()) advance();
+			}
+			else {
+				addToken(SLASH);
+			}
+			break;
+			
+			
 	 case ' ':
-	 case '\r':
-	 case '\t':
-		break;
-		
-	 case '\n':
-		line++;
-		break;
+     case '\r':
+     case '\t':
+       
+       break;
+
+     case '\n':
+       line++;
+       break;
+       
+     case '!':
+         addToken(match('=') ? BANG_EQUAL : BANG);
+         break;
+       case '=':
+         addToken(match('=') ? EQUAL_EQUAL : EQUAL);
+         break;
+       case '<':
+         addToken(match('=') ? LESS_EQUAL : LESS);
+         break;
+       case '>':
+         addToken(match('=') ? GREATER_EQUAL : GREATER);
+         break;
+
+	 
+	
 	
 	 
 	 default:
